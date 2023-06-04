@@ -1,21 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "../services/axios";
+import { toast } from "react-toastify";
 import InputField from "../../components/InputField.component";
 import FacilityAdminLayout from "../../layout/FacilityAdminLayout";
 import { loginContext } from "../context/auth";
-import axios from "../../pages/services/axios";
-import { toast } from "react-toastify";
 
-function AddAppointment() {
+function EditAppointment() {
   const navigate = useNavigate();
   const { logout, loggedIn, user } = useContext(loginContext);
   const [staffsData, setStaffsData] = useState([]);
   const [patientData, setpatientData] = useState([]);
-
+  const [currentStaff, setCurrentStaff] = useState([]);
+  const [currentStaffid, setCurrentStaffId] = useState([]);
   // Getting Query From URL
   let search = useLocation().search;
   const id = new URLSearchParams(search).get("edit");
-
   const [appointment, setAppointment] = useState({
     patientid: `${id}`,
     facilityadminid: `${user?._id}`,
@@ -59,22 +59,26 @@ function AddAppointment() {
         console.log(response.data);
       });
   }
-  function getPatientData() {
-    axios.get(`/patients/?edit=${id}`).then((response) => {
-      setpatientData(response.data);
-    });
-  }
 
   useEffect(() => {
     getStaffs();
-    getPatientData();
   }, []);
 
+  // To Get Current Details
+  useEffect(() => {
+    axios.get(`/appointments/?edit=${id}`).then((response) => {
+      setAppointment(response?.data);
+      setCheckedValues(response?.data);
+      setCurrentStaff(response?.data?.assignedstaff[0]?.fullname);
+      setCurrentStaffId(response?.data?.assignedstaff[0]?._id);
+    });
+  }, []);
+
+  // To Update Staff
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setLoading(true);
     axios
-      .post("/appointment", {
+      .put(`/appointment/${id}`, {
         patientid: appointment?.patientid,
         facilityadminid: appointment?.facilityadminid,
         assignedstaffid: appointment?.assignedstaffid,
@@ -89,13 +93,11 @@ function AddAppointment() {
         eveningend: appointment?.eveningend,
       })
       .then((res) => {
-        navigate("/facilityadmin/patients", { replace: true }),
+        navigate("/facilityadmin/appointments", { replace: true }),
           toast.success(res.data);
       })
       .catch((err) => {
-        console.log(err.response.data);
-        console.log(appointment?.morningsession);
-        // setLoading(false);
+        toast.error(err.response.data);
       });
   };
 
@@ -105,13 +107,13 @@ function AddAppointment() {
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
             <h3 className="font-medium text-black dark:text-white">
-              Add Appointment
+              Edit Appointment
             </h3>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="p-6.5">
               <div className="border p-2 rounded-md mb-5.5">
-                <h1 className="text-lg">Patient: {patientData?.fullname}</h1>
+                <h1 className="text-lg">Patient: {appointment?.patientname}</h1>
               </div>
 
               <input type="hidden" name="patientid" onChange={handleChange} />
@@ -131,7 +133,7 @@ function AddAppointment() {
                   type="text"
                   onChange={handleChange}
                 >
-                  <option>Select Staff</option>
+                  <option defaultValue={currentStaffid}>{currentStaff}</option>
                   {staffsData.map((staff, i) => {
                     return (
                       <option value={staff?._id} key={i}>
@@ -149,7 +151,7 @@ function AddAppointment() {
                   name="morningsession"
                   type="checkbox"
                   onChange={handleCheckedValues}
-                  value={checkedValues?.morningsession}
+                  defaultValue={checkedValues?.morningsession}
                 />
                 <div className="flex flex-col gap-5.5 sm:flex-row">
                   <InputField
@@ -159,7 +161,7 @@ function AddAppointment() {
                     type="datetime-local"
                     placeholder="Start Time"
                     onChange={handleChange}
-                    value={appointment?.morningstart}
+                    defaultValue={appointment?.morningstart}
                   />
                   <InputField
                     className="w-full sm:w-1/2"
@@ -169,7 +171,7 @@ function AddAppointment() {
                     type="datetime-local"
                     placeholder="Stop Time"
                     onChange={handleChange}
-                    value={appointment?.morningend}
+                    defaultValue={appointment?.morningend}
                   />
                 </div>
               </div>
@@ -182,7 +184,7 @@ function AddAppointment() {
                   name="afternoonsession"
                   type="checkbox"
                   onChange={handleCheckedValues}
-                  value={checkedValues?.afternoonsession}
+                  defaultValue={checkedValues?.afternoonsession}
                 />
                 <div className="flex flex-col gap-5.5 sm:flex-row">
                   <InputField
@@ -192,7 +194,7 @@ function AddAppointment() {
                     type="datetime-local"
                     placeholder="Start Time"
                     onChange={handleChange}
-                    value={appointment?.afternoonstart}
+                    defaultValue={appointment?.afternoonstart}
                   />
                   <InputField
                     className="w-full sm:w-1/2"
@@ -201,7 +203,7 @@ function AddAppointment() {
                     type="datetime-local"
                     placeholder="Stop Time"
                     onChange={handleChange}
-                    value={appointment?.afternoonend}
+                    defaultValue={appointment?.afternoonend}
                   />
                 </div>
               </div>
@@ -213,7 +215,7 @@ function AddAppointment() {
                   name="eveningsession"
                   type="checkbox"
                   onChange={handleCheckedValues}
-                  value={checkedValues?.eveningsession}
+                  defaultValue={checkedValues?.eveningsession}
                 />
                 <div className="flex flex-col gap-5.5 sm:flex-row">
                   <InputField
@@ -223,7 +225,7 @@ function AddAppointment() {
                     type="datetime-local"
                     placeholder="Start Time"
                     onChange={handleChange}
-                    value={appointment?.eveningstart}
+                    defaultValue={appointment?.eveningstart}
                   />
                   <InputField
                     className="w-full sm:w-1/2"
@@ -232,46 +234,9 @@ function AddAppointment() {
                     type="datetime-local"
                     placeholder="Stop Time"
                     onChange={handleChange}
-                    value={appointment?.eveningend}
+                    defaultValue={appointment?.eveningend}
                   />
                 </div>
-              </div>
-
-              <div className="border p-4 mb-5.5">
-                <p className="font-bold mb-4">
-                  Please confirm if patient Health details are up to date before
-                  submitting!!!...
-                </p>
-                {/* ======Medications===== */}
-                <h1 className="mb-2 block text-sm font-medium text-black dark:text-white">
-                  Medications
-                </h1>
-                {patientData?.medications?.split("\n").map((drug, i) => (
-                  <div key={i} className="flex gap-2 text-lg">
-                    <span>{i + 1}.</span>
-                    <span>{drug}</span>
-                  </div>
-                ))}
-                {/* ======Ailment====== */}
-                <h1 className="mb-2 block text-sm font-medium text-black dark:text-white mt-4">
-                  Ailment
-                </h1>
-                {patientData?.ailment?.split("\n").map((drug, i) => (
-                  <div key={i} className="flex gap-2 text-lg">
-                    <span>{i + 1}.</span>
-                    <span>{drug}</span>
-                  </div>
-                ))}
-                {/* ========Note========= */}
-                <h1 className="mb-2 block text-sm font-medium text-black dark:text-white mt-4">
-                  Note
-                </h1>
-                {patientData?.note?.split("\n").map((drug, i) => (
-                  <div key={i} className="flex gap-2 text-lg">
-                    <span>{i + 1}.</span>
-                    <span>{drug}</span>
-                  </div>
-                ))}
               </div>
 
               <div className="mb-6 flex gap-4">
@@ -279,15 +244,15 @@ function AddAppointment() {
                   type="submit"
                   className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
                 >
-                  Add Appointment
+                  Edit Appointment
                 </button>
               </div>
             </div>
           </form>
         </div>
-      </div>
+      </div>{" "}
     </FacilityAdminLayout>
   );
 }
 
-export default AddAppointment;
+export default EditAppointment;

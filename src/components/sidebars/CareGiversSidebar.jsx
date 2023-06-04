@@ -24,7 +24,7 @@ function CareGiversSidebar({ sidebarOpen, setSidebarOpen }) {
 
   const menu = [
     { name: "Dashboard", link: "/dashboard" },
-    { name: "Patients", link: "/caregiver/patients" },
+    { name: "Patients", link: "/caregiver/appointments" },
     { name: "Profile", link: "/profile" },
   ];
 
@@ -70,20 +70,10 @@ function CareGiversSidebar({ sidebarOpen, setSidebarOpen }) {
       icon: <TbLayoutDashboard size="30" className="text-primary" />,
     },
     {
-      name: "Patients",
-      link: "/caregiver/patients",
+      name: "Daily Checks",
+      link: "/caregiver/appointments",
       icon: <MdOutlineElderly size="30" className="text-primary" />,
     },
-    // {
-    //   name: "Incident Reports",
-    //   link: "/admin/incident-reports",
-    //   icon: <TbReportMedical size="30" className="text-primary" />,
-    // },
-    // {
-    //   name: "Death Reports",
-    //   link: "/admin/death-reports",
-    //   icon: <MdOutlineDangerous size="30" className="text-primary" />,
-    // },
     {
       name: "Profile",
       link: "/profile",

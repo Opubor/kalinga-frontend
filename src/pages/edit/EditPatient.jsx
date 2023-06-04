@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import DefaultLayout from "../../layout/DefaultLayout";
 import axios from "../services/axios";
 import { toast } from "react-toastify";
 import InputField from "../../components/InputField.component";
@@ -22,7 +21,6 @@ function EditPatient() {
     ailment: "",
     note: "",
   });
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -61,7 +59,8 @@ function EditPatient() {
         note: patientData?.note,
       })
       .then((res) => {
-        navigate("/admin/patients", { replace: true }), toast.success(res.data);
+        navigate("/facilityadmin/patients", { replace: true }),
+          toast.success(res.data);
       })
       .catch((err) => {
         toast.error(err.response.data);

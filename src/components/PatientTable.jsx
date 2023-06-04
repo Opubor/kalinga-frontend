@@ -114,8 +114,8 @@ function PatientTable() {
                   <Td>{data?.staff[0]?.facilityname}</Td>
                   <Td>
                     <Link
-                      className="bg-primary p-2"
-                      to={`/appointment?appointment=${data?._id}`}
+                      className="bg-primary p-2 rounded-md text-white"
+                      to={`/appointment?edit=${data?._id}`}
                     >
                       Add Appointment
                     </Link>

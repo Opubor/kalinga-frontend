@@ -27,6 +27,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     { name: "Dashboard", link: "/dashboard" },
     { name: "Facilities", link: "/admin/facilities" },
     { name: "Patients", link: "/admin/patients" },
+    { name: "Daily Checks", link: "/admin/appointments" },
     { name: "Staff", link: "/admin/staff" },
     { name: "Incident Reports", link: "/admin/incident-reports" },
     { name: "Death Reports", link: "/admin/death-reports" },
@@ -82,6 +83,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     {
       name: "Patients",
       link: "/admin/patients",
+      icon: <MdOutlineElderly size="30" className="text-primary" />,
+    },
+    {
+      name: "Daily Checks",
+      link: "/admin/appointments",
       icon: <MdOutlineElderly size="30" className="text-primary" />,
     },
     {

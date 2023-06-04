@@ -14,6 +14,9 @@ const Profile = React.lazy(() => import("./pages/admin/Profile"));
 const Settings = React.lazy(() => import("./pages/admin/Settings"));
 const Incidents = React.lazy(() => import("./pages/admin/Incidents"));
 const Deaths = React.lazy(() => import("./pages/admin/Deaths"));
+const AdminAppointments = React.lazy(() =>
+  import("./pages/admin/Appointments")
+);
 const EditStaff = React.lazy(() => import("./pages/edit/EditStaff"));
 const EditIncident = React.lazy(() => import("./pages/edit/EditIncident"));
 const EditDeath = React.lazy(() => import("./pages/edit/EditDeath"));
@@ -24,6 +27,9 @@ const ViewDeath = React.lazy(() => import("./pages/view/ViewDeath"));
 const ViewStaff = React.lazy(() => import("./pages/view/ViewStaff"));
 const ViewPatient = React.lazy(() => import("./pages/view/ViewPatient"));
 const ViewFacility = React.lazy(() => import("./pages/view/ViewFacility"));
+const ViewAppointment = React.lazy(() =>
+  import("./pages/view/ViewAppointment")
+);
 const Preloader = React.lazy(() => import("./components/PreLoader"));
 
 // ===============FACILITY ADMIN========================
@@ -42,11 +48,18 @@ const FacilityAdminDeaths = React.lazy(() =>
 const AddAppointment = React.lazy(() =>
   import("./pages/facilityAdmin/AddAppointment")
 );
+const FacilityAdminAppointments = React.lazy(() =>
+  import("./pages/facilityAdmin/Appointments")
+);
+const EditAppointment = React.lazy(() =>
+  import("./pages/facilityAdmin/EditAppointment")
+);
 
 // ====================CARE GIVERS======================
-const CareGiverPatients = React.lazy(() =>
-  import("./pages/caregivers/Patients")
+const CareGiverAppointments = React.lazy(() =>
+  import("./pages/caregivers/Appointments")
 );
+const Feedback = React.lazy(() => import("./pages/caregivers/Feedback"));
 
 function App() {
   return (
@@ -58,12 +71,14 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            {/* ==================Admin===================== */}
             <Route path="/admin/facilities" element={<Facilities />} />
             <Route path="/admin/patients" element={<Patients />} />
             <Route path="/admin/staffs" element={<Staffs />} />
             <Route path="/admin/incident-reports" element={<Incidents />} />
             <Route path="/admin/death-reports" element={<Deaths />} />
             <Route path="/admin/edit-facility" element={<EditFacility />} />
+            <Route path="/admin/appointments" element={<AdminAppointments />} />
             <Route path="/admin/view-facility" element={<ViewFacility />} />
 
             {/* ===================================================== */}
@@ -71,6 +86,7 @@ function App() {
             <Route path="/view-death" element={<ViewDeath />} />
             <Route path="/view-staff" element={<ViewStaff />} />
             <Route path="/view-patient" element={<ViewPatient />} />
+            <Route path="/view-appointment" element={<ViewAppointment />} />
             <Route path="/edit-incident" element={<EditIncident />} />
             <Route path="/edit-death" element={<EditDeath />} />
             <Route path="/edit-patient" element={<EditPatient />} />
@@ -95,9 +111,21 @@ function App() {
               path="/facilityadmin/death-reports"
               element={<FacilityAdminDeaths />}
             />
+            <Route
+              path="/facilityadmin/appointments"
+              element={<FacilityAdminAppointments />}
+            />
+            <Route
+              path="/facilityadmin/edit-appointment"
+              element={<EditAppointment />}
+            />
             <Route path="/appointment" element={<AddAppointment />} />
             {/* =================CAREGIVERS================= */}
-            <Route path="/caregiver/patients" element={<CareGiverPatients />} />
+            <Route
+              path="/caregiver/appointments"
+              element={<CareGiverAppointments />}
+            />
+            <Route path="/caregiver/feedback" element={<Feedback />} />
           </Routes>
         </BrowserRouter>
       </LoginProvider>

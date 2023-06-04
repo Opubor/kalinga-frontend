@@ -25,6 +25,7 @@ function FacilityAdminSidebar({ sidebarOpen, setSidebarOpen }) {
   const menu = [
     { name: "Dashboard", link: "/dashboard" },
     { name: "Patients", link: "/facilityadmin/patients" },
+    { name: "Patients", link: "/facilityadmin/appointments" },
     { name: "Staff", link: "/facilityadmin/staff" },
     { name: "Incident Reports", link: "/facilityadmin/incident-reports" },
     { name: "Death Reports", link: "/facilityadmin/death-reports" },
@@ -75,6 +76,11 @@ function FacilityAdminSidebar({ sidebarOpen, setSidebarOpen }) {
     {
       name: "Patients",
       link: "/facilityadmin/patients",
+      icon: <MdOutlineElderly size="30" className="text-primary" />,
+    },
+    {
+      name: "Daily Checks",
+      link: "/facilityadmin/appointments",
       icon: <MdOutlineElderly size="30" className="text-primary" />,
     },
     {

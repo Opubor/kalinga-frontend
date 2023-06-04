@@ -17,6 +17,9 @@ function Dashboard() {
   const facilityadmin = user?.role === "facilityadmin";
   const caregiver = user?.role === "caregiver";
 
+  let id = user?._id;
+  let role = user?.role;
+
   const [deaths, setDeaths] = useState([]);
   const [facilitiesData, setFacilitiesData] = useState([]);
   const [patientsData, setPatientsData] = useState([]);
@@ -47,7 +50,7 @@ function Dashboard() {
 
   function getPatients() {
     axios
-      .get("/patients")
+      .get(`/patients?role=${role}&facilityAdminId=${id}`)
       .then((response) => {
         setPatientsData(response?.data);
       })
@@ -70,7 +73,7 @@ function Dashboard() {
 
   function getStaffs() {
     axios
-      .get("/staff")
+      .get(`/staff?staffid=${id}&role=${role}`)
       .then((response) => {
         setStaffsData(response?.data);
       })
@@ -119,7 +122,7 @@ function Dashboard() {
               cardName={"Daily Checks"}
               // count={dailyChecks?.length ? dailyChecks.length : 0}
               IconComponent={BsCalendarCheck}
-              link={"/admin/daily-checks"}
+              link={"/admin/appointments"}
               additionalText={"Remaining daily checks!"}
             />
           </div>
@@ -142,15 +145,15 @@ function Dashboard() {
           </div>
 
           {/* <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-      <ChartOne />
-      <ChartTwo />
-      <ChartThree />
-      <MapOne />
-      <div className="col-span-12 xl:col-span-8">
-        <TableOne />
-      </div>
-      <ChatCard />
-    </div> */}
+            <ChartOne />
+            <ChartTwo />
+            <ChartThree />
+            <MapOne />
+            <div className="col-span-12 xl:col-span-8">
+              <TableOne />
+            </div>
+            <ChatCard />
+          </div> */}
 
           {/* <BigCalendar/> */}
         </DefaultLayout>
@@ -179,7 +182,7 @@ function Dashboard() {
                 cardName={"Daily Checks"}
                 // count={dailyChecks?.length ? dailyChecks.length : 0}
                 IconComponent={BsCalendarCheck}
-                link={"/admin/daily-checks"}
+                link={"/facilityadmin/appointments"}
                 additionalText={"Remaining daily checks!"}
               />
             </div>
@@ -219,20 +222,12 @@ function Dashboard() {
       {caregiver && (
         <CareGiverLayout>
           <>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
-              <CardOne
-                cardName={"Patients"}
-                count={patientsData?.length ? patientsData.length : 0}
-                IconComponent={MdOutlineElderly}
-                link={"/caregiver/patients"}
-                additionalText={"Check out your patients!"}
-              />
-
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
               <CardOne
                 cardName={"Daily Checks"}
                 // count={dailyChecks?.length ? dailyChecks.length : 0}
                 IconComponent={BsCalendarCheck}
-                link={"/admin/daily-checks"}
+                link={"/caregiver/appointments"}
                 additionalText={"Remaining daily checks!"}
               />
             </div>

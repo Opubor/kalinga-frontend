@@ -7,6 +7,7 @@ const InputField = ({
   type,
   placeholder,
   defaultValue,
+  defaultChecked,
   icon,
   className,
   onChange,
@@ -28,6 +29,7 @@ const InputField = ({
         placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={onChange}
+        defaultChecked={defaultChecked}
       />
     </div>
   </div>
