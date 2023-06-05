@@ -50,9 +50,22 @@ function ViewPatient() {
                 <span>{patientData?.dob}</span>
               </h1>
               <h1 className="py text-md mt-4 border border-black p-2 rounded-lg">
-                <span className=" font-semibold">Street: </span>
-                <span>{patientData?.street}</span>
+                <span className="block font-semibold">Address </span>
+                <span className="block font-bold">
+                  Street: {patientData?.street}
+                </span>
+                <span className="block font-bold">
+                  City: {patientData?.city}
+                </span>
+                <span className="block font-bold">
+                  State: {patientData?.state}
+                </span>
+                <span className="block font-bold">
+                  Zipcode:
+                  {patientData?.zipcode}
+                </span>
               </h1>
+
               <h1 className="py text-md mt-4 border border-black p-2 rounded-lg">
                 <span className=" font-semibold">City: </span>
                 <span>{patientData?.city}</span>
@@ -71,13 +84,23 @@ function ViewPatient() {
               <div>
                 <h2 className="mt-4 font-semibold">Medications</h2>
                 <h3 className="w-full border border-black rounded-lg p-4">
-                  {patientData?.medications}
+                  {patientData?.medications?.split("\n").map((drug, i) => (
+                    <div key={i} className="flex gap-2 text-lg">
+                      <span>{i + 1}.</span>
+                      <span>{drug}</span>
+                    </div>
+                  ))}
                 </h3>
               </div>
               <div>
                 <h2 className="mt-4 font-semibold">Ailment if any</h2>
                 <h3 className="w-full border border-black rounded-lg p-4">
-                  {patientData?.ailment}
+                  {patientData?.ailment?.split("\n").map((drug, i) => (
+                    <div key={i} className="flex gap-2 text-lg">
+                      <span>{i + 1}.</span>
+                      <span>{drug}</span>
+                    </div>
+                  ))}
                 </h3>
               </div>
               <div>
@@ -115,10 +138,18 @@ function ViewPatient() {
                 <span>{patientData?.dob}</span>
               </h1>
               <h1 className="py text-md mt-4 border border-black p-2 rounded-lg">
-                <span className=" font-semibold">Address: </span>
-                <span>
-                  {patientData?.street} {patientData?.city} {patientData?.state}
-                  {" - "}
+                <span className="block font-semibold">Address </span>
+                <span className="block font-bold">
+                  Street: {patientData?.street}
+                </span>
+                <span className="block font-bold">
+                  City: {patientData?.city}
+                </span>
+                <span className="block font-bold">
+                  State: {patientData?.state}
+                </span>
+                <span className="block font-bold">
+                  Zipcode:
                   {patientData?.zipcode}
                 </span>
               </h1>
@@ -126,13 +157,23 @@ function ViewPatient() {
               <div>
                 <h2 className="mt-4 font-semibold">Medications</h2>
                 <h3 className="w-full border border-black rounded-lg p-4">
-                  {patientData?.medications}
+                  {patientData?.medications?.split("\n").map((drug, i) => (
+                    <div key={i} className="flex gap-2 text-lg">
+                      <span>{i + 1}.</span>
+                      <span>{drug}</span>
+                    </div>
+                  ))}
                 </h3>
               </div>
               <div>
                 <h2 className="mt-4 font-semibold">Ailment if any</h2>
                 <h3 className="w-full border border-black rounded-lg p-4">
-                  {patientData?.ailment}
+                  {patientData?.ailment?.split("\n").map((drug, i) => (
+                    <div key={i} className="flex gap-2 text-lg">
+                      <span>{i + 1}.</span>
+                      <span>{drug}</span>
+                    </div>
+                  ))}
                 </h3>
               </div>
               <div>
@@ -170,10 +211,18 @@ function ViewPatient() {
                 <span>{patientData?.dob}</span>
               </h1>
               <h1 className="py text-md mt-4 border border-black p-2 rounded-lg">
-                <span className=" font-semibold">Address: </span>
-                <span>
-                  {patientData?.street} {patientData?.city} {patientData?.state}
-                  {" - "}
+                <span className="block font-semibold">Address </span>
+                <span className="block font-bold">
+                  Street: {patientData?.street}
+                </span>
+                <span className="block font-bold">
+                  City: {patientData?.city}
+                </span>
+                <span className="block font-bold">
+                  State: {patientData?.state}
+                </span>
+                <span className="block font-bold">
+                  Zipcode:
                   {patientData?.zipcode}
                 </span>
               </h1>
@@ -181,13 +230,23 @@ function ViewPatient() {
               <div>
                 <h2 className="mt-4 font-semibold">Medications</h2>
                 <h3 className="w-full border border-black rounded-lg p-4">
-                  {patientData?.medications}
+                  {patientData?.medications?.split("\n").map((drug, i) => (
+                    <div key={i} className="flex gap-2 text-lg">
+                      <span>{i + 1}.</span>
+                      <span>{drug}</span>
+                    </div>
+                  ))}
                 </h3>
               </div>
               <div>
                 <h2 className="mt-4 font-semibold">Ailment if any</h2>
                 <h3 className="w-full border border-black rounded-lg p-4">
-                  {patientData?.ailment}
+                  {patientData?.ailment?.split("\n").map((drug, i) => (
+                    <div key={i} className="flex gap-2 text-lg">
+                      <span>{i + 1}.</span>
+                      <span>{drug}</span>
+                    </div>
+                  ))}
                 </h3>
               </div>
               <div>

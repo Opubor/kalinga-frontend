@@ -50,10 +50,12 @@ function AddDeath() {
       });
   };
 
+  let id = user?._id;
+  let role = user?.role;
   // Get Patients =========================================
   function getPatients() {
     axios
-      .get("/patients")
+      .get(`/patients?role=${role}&facilityAdminId=${id}`)
       .then((response) => {
         setPatientsData(response?.data);
       })

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { loginContext } from "../../pages/context/auth";
 import FacilityAdminLayout from "../../layout/FacilityAdminLayout";
 import CareGiverLayout from "../../layout/CareGiverLayout";
+import ButtonPreloader from "../../components/buttons/ButtonPreloader";
 
 function Profile() {
   const { logout, loggedIn, user } = useContext(loginContext);
@@ -27,14 +28,18 @@ function Profile() {
     event.preventDefault();
     const formData = new FormData();
     formData.append("filename", profilePicData);
+    setLoading(true);
     axios
       .put(`/staffpic/${id}`, formData)
       .then((res) => {
         toast.success(res.data);
+        setLoading(false);
+        window.location.reload(true);
       })
       .catch((err) => {
         toast.error(err.response.data);
-      }); // Handle form submission
+        setLoading(false);
+      });
   };
 
   return (
@@ -141,7 +146,7 @@ function Profile() {
             </div>
             <div className="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
               <div className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
-                <div className="relative drop-shadow-2">
+                <div className="relative drop-shadow-2 rounded-full">
                   <img
                     src={user?.profilepic}
                     alt="profile"
@@ -149,8 +154,9 @@ function Profile() {
                       top: "0",
                       width: "100%",
                       objectFit: "cover",
+                      height: "153px",
                     }}
-                    className="h-40 w-44 rounded-full"
+                    className="rounded-full"
                   />
 
                   <label
@@ -186,15 +192,17 @@ function Profile() {
                 <input
                   type="file"
                   name="filename"
+                  id="profile"
                   onChange={handleChange}
                   className="sr-only"
                 />
-                <input
-                  type="submit"
+                <button
                   id="profile"
-                  value="Update"
-                  className="bg-white px-4 py rounded-lg sr-only"
-                />
+                  className="bg-primary mt-2 px-4 py rounded-sm text-white"
+                  value="update"
+                >
+                  {loading ? <ButtonPreloader /> : "Update profile picture"}
+                </button>
               </form>
 
               <div className="mt-4">

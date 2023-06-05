@@ -59,7 +59,6 @@ function Dashboard() {
       });
   }
 
-  // Get Incidents ===================================================
   function getIncidents() {
     axios
       .get("/reports?type=incident")
@@ -84,11 +83,13 @@ function Dashboard() {
 
   // UseEffect ============================================
   useEffect(() => {
-    getDeaths();
-    getFacilities();
-    getPatients();
-    getIncidents();
-    getStaffs();
+    if (user) {
+      getDeaths();
+      getFacilities();
+      getPatients();
+      getIncidents();
+      getStaffs();
+    }
   }, []);
   return (
     <>

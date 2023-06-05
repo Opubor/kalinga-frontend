@@ -4,6 +4,9 @@ import Logo from "../assets/logo/logo.svg";
 import LogoDark from "../assets/logo/logo-dark.svg";
 import { Navigate } from "react-router-dom";
 import { loginContext } from "./context/auth";
+import axios from "../pages/services/axios";
+import { toast } from "react-toastify";
+import ButtonPreloader from "../components/buttons/ButtonPreloader";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -13,12 +16,26 @@ function Login() {
   function handleChange(e) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
+  const [loading, setLoading] = useState(false);
 
   const { login, loggedIn, user } = useContext(loginContext);
   const submitLogin = (e) => {
     e.preventDefault();
-    login(formData.email, formData.password);
-    console.log(user);
+    setLoading(true);
+    // login(formData?.email, formData?.password);
+    axios
+      .post("/login", {
+        email: formData?.email,
+        password: formData?.password,
+      })
+      .then((response) => {
+        login(response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        toast.error(err.response?.data);
+        setLoading(false);
+      });
   };
 
   if (loggedIn) {
@@ -252,7 +269,7 @@ function Login() {
                   type="submit"
                   className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
                 >
-                  Sign In
+                  {loading ? <ButtonPreloader /> : "Sign In"}
                 </button>
               </div>
 

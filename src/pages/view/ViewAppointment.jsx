@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CareGiverLayout from "../../layout/CareGiverLayout";
 import DefaultLayout from "../../layout/DefaultLayout";
 import FacilityAdminLayout from "../../layout/FacilityAdminLayout";
@@ -16,6 +16,7 @@ function ViewAppointment() {
   const [assignedStaffid, setAssignedStaffId] = useState([]);
   const [facility, setFacility] = useState([]);
   const [currentPatientUniqueId, setCurrentPatientUniqueId] = useState([]);
+  const [currentPatientId, setCurrentPatientId] = useState([]);
   const [appointments, setAppointments] = useState([]);
   // Getting Query From URL
   let search = useLocation().search;
@@ -29,6 +30,7 @@ function ViewAppointment() {
       setAssignedStaffId(response.data?.assignedstaff[0]?.uniqueid);
       setFacility(response.data?.facilityadmin[0]?.facilityname);
       setCurrentPatientUniqueId(response.data?.patients[0]?.uniqueid);
+      setCurrentPatientId(response.data?.patients[0]?._id);
     });
   }, []);
 
@@ -47,6 +49,12 @@ function ViewAppointment() {
                   {currentPatientUniqueId} {" - "}
                   {appointments?.patientname}
                 </p>
+                <Link
+                  className="px-4 py text-primary font-bold"
+                  to={`/view-patient?edit=${currentPatientId}`}
+                >
+                  See patient details
+                </Link>
               </div>
               <div className="rounded-lg border border-black mt-4 lg:mt-0">
                 <h1 className="border-b border-b-black px-4 py font-semibold text-md">
@@ -61,6 +69,10 @@ function ViewAppointment() {
             </div>
             <h1 className="py text-md mt-4 border border-black p-2 rounded-lg">
               <span className=" font-semibold">Facility: </span>
+              <span>{facility}</span>
+            </h1>
+            <h1 className="py text-md mt-4 border border-black p-2 rounded-lg">
+              <span className=" font-semibold">Patient Address: </span>
               <span>{facility}</span>
             </h1>
             {appointments?.morningsession === "true" && (
@@ -106,6 +118,12 @@ function ViewAppointment() {
                   {currentPatientUniqueId} {" - "}
                   {appointments?.patientname}
                 </p>
+                <Link
+                  className="px-4 py text-primary font-bold"
+                  to={`/view-patient?edit=${currentPatientId}`}
+                >
+                  See patient details
+                </Link>
               </div>
               <div className="rounded-lg border border-black mt-4 lg:mt-0">
                 <h1 className="border-b border-b-black px-4 py font-semibold text-md">
@@ -165,6 +183,12 @@ function ViewAppointment() {
                   {currentPatientUniqueId} {" - "}
                   {appointments?.patientname}
                 </p>
+                <Link
+                  className="px-4 py text-primary font-bold"
+                  to={`/view-patient?edit=${currentPatientId}`}
+                >
+                  See patient details
+                </Link>
               </div>
               <div className="rounded-lg border border-black mt-4 lg:mt-0">
                 <h1 className="border-b border-b-black px-4 py font-semibold text-md">

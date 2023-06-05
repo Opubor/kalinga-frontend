@@ -7,6 +7,8 @@ import { LoginProvider } from "./pages/context/auth";
 const Login = React.lazy(() => import("./pages/Login"));
 const Register = React.lazy(() => import("./pages/Register"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
+
+// ===========ADMIN==========
 const Facilities = React.lazy(() => import("./pages/admin/Facilities"));
 const Patients = React.lazy(() => import("./pages/admin/Patients"));
 const Staffs = React.lazy(() => import("./pages/admin/Staffs"));
@@ -17,11 +19,15 @@ const Deaths = React.lazy(() => import("./pages/admin/Deaths"));
 const AdminAppointments = React.lazy(() =>
   import("./pages/admin/Appointments")
 );
+
+// =========EDITS===========
 const EditStaff = React.lazy(() => import("./pages/edit/EditStaff"));
 const EditIncident = React.lazy(() => import("./pages/edit/EditIncident"));
 const EditDeath = React.lazy(() => import("./pages/edit/EditDeath"));
 const EditPatient = React.lazy(() => import("./pages/edit/EditPatient"));
 const EditFacility = React.lazy(() => import("./pages/edit/EditFacility"));
+
+// ========VIEWS==========
 const ViewIncident = React.lazy(() => import("./pages/view/ViewIncident"));
 const ViewDeath = React.lazy(() => import("./pages/view/ViewDeath"));
 const ViewStaff = React.lazy(() => import("./pages/view/ViewStaff"));
@@ -30,7 +36,6 @@ const ViewFacility = React.lazy(() => import("./pages/view/ViewFacility"));
 const ViewAppointment = React.lazy(() =>
   import("./pages/view/ViewAppointment")
 );
-const Preloader = React.lazy(() => import("./components/PreLoader"));
 
 // ===============FACILITY ADMIN========================
 const FacilityAdminPatients = React.lazy(() =>
@@ -61,6 +66,9 @@ const CareGiverAppointments = React.lazy(() =>
 );
 const Feedback = React.lazy(() => import("./pages/caregivers/Feedback"));
 
+// =======PRELOADER===============
+const Preloader = React.lazy(() => import("./components/PreLoader"));
+
 function App() {
   return (
     <Suspense fallback={<Preloader />}>
@@ -81,12 +89,14 @@ function App() {
             <Route path="/admin/appointments" element={<AdminAppointments />} />
             <Route path="/admin/view-facility" element={<ViewFacility />} />
 
-            {/* ===================================================== */}
+            {/* ======================VIEWS=============================== */}
             <Route path="/view-incident" element={<ViewIncident />} />
             <Route path="/view-death" element={<ViewDeath />} />
             <Route path="/view-staff" element={<ViewStaff />} />
             <Route path="/view-patient" element={<ViewPatient />} />
             <Route path="/view-appointment" element={<ViewAppointment />} />
+
+            {/* ======================EDITS=============================== */}
             <Route path="/edit-incident" element={<EditIncident />} />
             <Route path="/edit-death" element={<EditDeath />} />
             <Route path="/edit-patient" element={<EditPatient />} />

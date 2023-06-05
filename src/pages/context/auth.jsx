@@ -27,11 +27,10 @@ export function LoginProvider({ children }) {
     getUser().then(() => setLoading(false));
   }, []);
 
-  async function login(email, password) {
+  async function login(response) {
     try {
-      const response = await axios.post("/login", { email, password });
+      // const response = await axios.post("/login", { email, password });
       localStorage.setItem("token", response.data);
-      // console.log(response?.data);
       setLoggedIn(true);
       getUser();
     } catch (error) {

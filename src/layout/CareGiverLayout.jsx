@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { loginContext } from "../pages/context/auth";
 import { Navigate } from "react-router-dom";
 import CareGiversSidebar from "../components/sidebars/CareGiversSidebar";
+import Forbidden from "../components/Forbidden";
 
 function CareGiverLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -51,7 +52,7 @@ function CareGiverLayout({ children }) {
           {/* <!-- ===== Page Wrapper End ===== --> */}
         </div>
       ) : (
-        "UnAuthorized"
+        <Forbidden />
       )}
     </>
   );

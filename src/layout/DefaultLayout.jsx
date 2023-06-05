@@ -5,6 +5,7 @@ import { loginContext } from "../pages/context/auth";
 import { Navigate } from "react-router-dom";
 import FacilityAdminSidebar from "../components/sidebars/FacilityAdminSidebar";
 import CareGiversSidebar from "../components/sidebars/CareGiversSidebar";
+import Forbidden from "../components/Forbidden";
 
 const DefaultLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -52,7 +53,7 @@ const DefaultLayout = ({ children }) => {
           {/* <!-- ===== Page Wrapper End ===== --> */}
         </div>
       ) : (
-        "UnAuthorized"
+        <Forbidden />
       )}
     </>
   );
