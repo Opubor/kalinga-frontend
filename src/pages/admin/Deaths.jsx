@@ -8,12 +8,6 @@ function Deaths() {
   return (
     <DefaultLayout>
       <DeathTable />
-      {/* <Tab
-        viewDisplay={<DeathTable />}
-        viewTag={"Deaths"}
-        addTag={"Add Death"}
-        addDisplay={<AddDeath />}
-      /> */}
     </DefaultLayout>
   );
 }

@@ -29,7 +29,6 @@ export function LoginProvider({ children }) {
 
   async function login(response) {
     try {
-      // const response = await axios.post("/login", { email, password });
       localStorage.setItem("token", response.data);
       setLoggedIn(true);
       getUser();

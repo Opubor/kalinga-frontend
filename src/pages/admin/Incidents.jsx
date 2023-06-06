@@ -8,12 +8,6 @@ function Incidents() {
   return (
     <DefaultLayout>
       <IncidentTable />
-      {/* <Tab
-        addTag={"Add Incident"}
-        addDisplay={<AddIncident />}
-        viewTag={"Incidents"}
-        viewDisplay={<IncidentTable />}
-      /> */}
     </DefaultLayout>
   );
 }

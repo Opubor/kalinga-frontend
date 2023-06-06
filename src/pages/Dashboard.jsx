@@ -20,77 +20,77 @@ function Dashboard() {
   let id = user?._id;
   let role = user?.role;
 
-  const [deaths, setDeaths] = useState([]);
-  const [facilitiesData, setFacilitiesData] = useState([]);
-  const [patientsData, setPatientsData] = useState([]);
-  const [incidents, setIncidents] = useState([]);
-  const [staffsData, setStaffsData] = useState([]);
+  // const [deaths, setDeaths] = useState([]);
+  // const [facilitiesData, setFacilitiesData] = useState([]);
+  // const [patientsData, setPatientsData] = useState([]);
+  // const [incidents, setIncidents] = useState([]);
+  // const [staffsData, setStaffsData] = useState([]);
 
-  function getDeaths() {
-    axios
-      .get("/reports?type=death")
-      .then((response) => {
-        setDeaths(response?.data);
-      })
-      .catch((err) => {
-        toast.error(err.response.data);
-      });
-  }
+  // function getDeaths() {
+  //   axios
+  //     .get("/reports?type=death")
+  //     .then((response) => {
+  //       setDeaths(response?.data);
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.response.data);
+  //     });
+  // }
 
-  function getFacilities() {
-    axios
-      .get("/facility")
-      .then((response) => {
-        setFacilitiesData(response?.data);
-      })
-      .catch((response) => {
-        console.log(response.data);
-      });
-  }
+  // function getFacilities() {
+  //   axios
+  //     .get("/facility")
+  //     .then((response) => {
+  //       setFacilitiesData(response?.data);
+  //     })
+  //     .catch((response) => {
+  //       console.log(response.data);
+  //     });
+  // }
 
-  function getPatients() {
-    axios
-      .get(`/patients?role=${role}&facilityAdminId=${id}`)
-      .then((response) => {
-        setPatientsData(response?.data);
-      })
-      .catch((response) => {
-        console.log(response.data);
-      });
-  }
+  // function getPatients() {
+  //   axios
+  //     .get(`/patients?role=${role}&facilityAdminId=${id}`)
+  //     .then((response) => {
+  //       setPatientsData(response?.data);
+  //     })
+  //     .catch((response) => {
+  //       console.log(response.data);
+  //     });
+  // }
 
-  function getIncidents() {
-    axios
-      .get("/reports?type=incident")
-      .then((response) => {
-        setIncidents(response?.data);
-      })
-      .catch((err) => {
-        toast.error(err.response.data);
-      });
-  }
+  // function getIncidents() {
+  //   axios
+  //     .get("/reports?type=incident")
+  //     .then((response) => {
+  //       setIncidents(response?.data);
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.response.data);
+  //     });
+  // }
 
-  function getStaffs() {
-    axios
-      .get(`/staff?staffid=${id}&role=${role}`)
-      .then((response) => {
-        setStaffsData(response?.data);
-      })
-      .catch((response) => {
-        console.log(response.data);
-      });
-  }
+  // function getStaffs() {
+  //   axios
+  //     .get(`/staff?staffid=${id}&role=${role}`)
+  //     .then((response) => {
+  //       setStaffsData(response?.data);
+  //     })
+  //     .catch((response) => {
+  //       console.log(response.data);
+  //     });
+  // }
 
   // UseEffect ============================================
-  useEffect(() => {
-    if (user) {
-      getDeaths();
-      getFacilities();
-      getPatients();
-      getIncidents();
-      getStaffs();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     getDeaths();
+  //     getFacilities();
+  //     getPatients();
+  //     getIncidents();
+  //     getStaffs();
+  //   }
+  // }, []);
   return (
     <>
       {admin && (
@@ -98,14 +98,14 @@ function Dashboard() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
             <CardOne
               cardName={"Facilities"}
-              count={facilitiesData?.length ? facilitiesData.length : 0}
+              // count={facilitiesData?.length ? facilitiesData.length : 0}
               IconComponent={BsHouseUpFill}
               link={"/admin/facilities"}
               additionalText={"Click see you facilities!"}
             />
             <CardOne
               cardName={"Patients"}
-              count={patientsData?.length ? patientsData.length : 0}
+              // count={patientsData?.length ? patientsData.length : 0}
               IconComponent={MdOutlineElderly}
               link={"/admin/patients"}
               additionalText={"Check out your patients!"}
@@ -113,7 +113,7 @@ function Dashboard() {
 
             <CardOne
               cardName={"Staff"}
-              count={staffsData?.length ? staffsData.length : 0}
+              // count={staffsData?.length ? staffsData.length : 0}
               IconComponent={FaUserNurse}
               link={"/admin/staffs"}
               additionalText={"See your staff!"}
@@ -131,14 +131,14 @@ function Dashboard() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-8">
             <CardOne
               cardName={"Incidents Reports"}
-              count={incidents?.length ? incidents.length : 0}
+              // count={incidents?.length ? incidents.length : 0}
               IconComponent={BsHouseUpFill}
               link={"/admin/incident-reports"}
               additionalText={"incident"}
             />
             <CardOne
               cardName={"Death Reports"}
-              count={deaths?.length ? deaths?.length : 0}
+              // count={deaths?.length ? deaths?.length : 0}
               IconComponent={MdOutlineElderly}
               link={"/admin/death-reports"}
               additionalText={"Reports"}
@@ -165,7 +165,7 @@ function Dashboard() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
               <CardOne
                 cardName={"Patients"}
-                count={patientsData?.length ? patientsData.length : 0}
+                // count={patientsData?.length ? patientsData.length : 0}
                 IconComponent={MdOutlineElderly}
                 link={"/facilityadmin/patients"}
                 additionalText={"Check out your patients!"}
@@ -173,7 +173,7 @@ function Dashboard() {
 
               <CardOne
                 cardName={"Staff"}
-                count={staffsData?.length ? staffsData.length : 0}
+                // count={staffsData?.length ? staffsData.length : 0}
                 IconComponent={FaUserNurse}
                 link={"/facilityadmin/staffs"}
                 additionalText={"See your staff!"}
@@ -191,14 +191,14 @@ function Dashboard() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5 mt-8">
               <CardOne
                 cardName={"Incidents Reports"}
-                count={incidents?.length ? incidents.length : 0}
+                // count={incidents?.length ? incidents.length : 0}
                 IconComponent={BsHouseUpFill}
                 link={"/facilityadmin/incident-reports"}
                 additionalText={"incident"}
               />
               <CardOne
                 cardName={"Death Reports"}
-                count={deaths?.length ? deaths?.length : 0}
+                // count={deaths?.length ? deaths?.length : 0}
                 IconComponent={MdOutlineElderly}
                 link={"/facilityadmin/death-reports"}
                 additionalText={"Reports"}

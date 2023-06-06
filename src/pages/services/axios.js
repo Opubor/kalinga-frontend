@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
     // Add your backend URL here EXAMPLE
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://kalingabaseprod-production.up.railway.app/',
     timeout: 100000000
 })
 
